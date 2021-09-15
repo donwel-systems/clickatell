@@ -1,0 +1,19 @@
+{
+    "name": "donwel-systems/clickatell",
+    "description": "A package to send sms via Clickatell Sms Gateway",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Donald Weledji",
+            "email": "donald.weledji@donwelsystems.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "DonwelSystems\\Clickatell\\": "src/"
+        }
+    }
+}
