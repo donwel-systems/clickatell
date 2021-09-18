@@ -8,7 +8,6 @@
 
 namespace DonwelSystems\Clickatell\Services;
 use GuzzleHttp\Client as Guzzle;
-use Illuminate\Support\Facades\Http;
 use Log;
 
 
@@ -46,10 +45,10 @@ class Platform extends Clickatell
     public function send_clickatell($config = [])
     {
         $url = "https://platform.clickatell.com/messages/http/send?apiKey=".urlencode($config['api_key'])."&to=".urlencode($config['to'])."&content=".urlencode($config['message']);
-        $response = Http::get($url);
+        $response = $this->client->request('GET',$url);
         if($response){
-            $r =  json_decode($response->body());
-            if(!str_contains($response->body(), 'apiMessageId')){
+            $r =  json_decode($response->getBody());
+            if(!str_contains($response->getBody(), 'apiMessageId')){
                 Log::error(sprintf("Error sending sms message %s to number %s via clickatell with error message %s",$config['message'],$config['to'],$r->errorDescription));
                 return ["result"=>'error', "code"=>$r->errorCode, "error"=>$r->error, "errorDescription"=>$r->errorDescription];
             }
