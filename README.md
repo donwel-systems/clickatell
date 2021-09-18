@@ -7,8 +7,13 @@ The Rest API for the new Clickatell Platform is not supported in this Package
 2. Run php artisan vendor:publish 
 3. Choose the DonwelSystems\Clickatell\ClickatellServiceProvider and hit enter.
 4. Edit the config/clickatell.php file accordingly
-5. Edit confit/app.php and add the 'ClickatellFacade' class to the aliases array
+5. Edit config/app.php and add the ClickatellServiceProvider and 'ClickatellFacade' classes to the providers and aliases arrays
 ``` php
+    'providers' => [
+	.....
+	DonwelSystems\Clickatell\ClickatellServiceProvider::class
+	]
+
 'aliases' => [
     ...
     'Clickatell' => DonwelSystems\Clickatell\Facades\ClickatellFacade::class,
