@@ -1,7 +1,8 @@
 <?php
 
 namespace DonwelSystems\Clickatell;
-use DonwelSystems\Clickatell\Services\Clickatell;
+use DonwelSystems\Clickatell\Services\Central;
+use DonwelSystems\Clickatell\Services\Platform;
 use Illuminate\Support\ServiceProvider;
 
 class ClickatellServiceProvider extends ServiceProvider
@@ -15,9 +16,17 @@ class ClickatellServiceProvider extends ServiceProvider
     {
 
 
-            $this->app->bind('clickatell', function($app) {
-                return new Clickatell();
+        if ($this->getChannel() == 'central')
+        {
+            $this->app->singleton('clickatell', function($app) {
+                return new Central();
             });
+        } else
+        {
+            $this->app->singleton('clickatell', function($app) {
+                return new Platform();
+            });
+        }
 
     }
 
@@ -31,6 +40,18 @@ class ClickatellServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config/clickatell.php' =>  config_path('clickatell.php'),
         ], 'config');
+    }
+
+    /**
+     *  Get the clickatel channel  based on config file
+     *
+     * @return string
+     */
+    public function getChannel()
+    {
+        return $this->app['config']->get('clickatell.channel', 'central');
+
+
     }
 
 

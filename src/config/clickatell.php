@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: BemitechLLC
- * Date: 14/09/2021
- * Time: 00:09
- */
 
 return array(
-    'username'    => 'username', // accoun username
-    'password'    => 'password', // Account password
-    'api_key'     => 'api_key', // Account api Key, leaave blank for Nexmo
+    'channel'    => 'channel', // Channel Name : central (for old api => http://api.clickatell.com) , platform (for new api => https://platform.clickatell.com)
+    'username'    => 'username', // account username , leaave blank for platform
+    'password'    => 'password', // Account password , leaave blank for platform
+    'api_key'     => 'api_key', // Account api Key
 );
